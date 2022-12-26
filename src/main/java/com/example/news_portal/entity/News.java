@@ -30,9 +30,18 @@ public class News {
     @Enumerated(EnumType.STRING)
     private Category category;
 
+    @OneToMany(cascade = ALL, mappedBy = "news")
+    private List<Comment> comments;
+
     @ManyToMany(cascade = {
             REFRESH,
             MERGE,
-            DETACH})
+            DETACH}, mappedBy = "favorites")
     private List<User> elected;
+
+    @ManyToOne(cascade = {
+            REFRESH,
+            MERGE,
+            DETACH})
+    private User publisher;
 }
