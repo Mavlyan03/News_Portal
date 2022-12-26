@@ -1,9 +1,7 @@
 package com.example.news_portal.entity;
 
 import com.example.news_portal.entity.enums.Role;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,12 +12,13 @@ import java.util.List;
 
 import static javax.persistence.CascadeType.*;
 
-
 @Entity
 @Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class User implements UserDetails {
     @Id
     @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1, initialValue = 10)
@@ -48,6 +47,15 @@ public class User implements UserDetails {
             MERGE,
             DETACH}, mappedBy = "users")
     private List<Comment> myComments;
+
+//    public User(String name, String surname, String nickname, String photo, String password, Role role) {
+//        this.name = name;
+//        this.surname = surname;
+//        this.nickname = nickname;
+//        this.photo = photo;
+//        this.password = password;
+//        this.role = role;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
