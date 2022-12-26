@@ -17,10 +17,10 @@ public class AuthApi {
 
     private final UserService userService;
 
-//    @PostMapping("/sing_up")
-//    @Operation(summary = "Sign Up",
-//            description = "User can sign up")
-//    public AuthResponse signUp(@RequestBody SignUpRequest signUpRequest) {
-//        return userService.registration(signUpRequest);
-//    }
+    @PostMapping("/sing_up")
+    @Operation(summary = "Sign Up",
+            description = "User can sign up")
+    public AuthResponse signUp(@RequestBody SignUpRequest signUpRequest) {
+        return userService.registration(signUpRequest);
+    }
 }
