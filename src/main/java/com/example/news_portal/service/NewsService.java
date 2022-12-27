@@ -9,7 +9,10 @@ import com.example.news_portal.exception.NotFoundException;
 import com.example.news_portal.repository.NewsRepository;
 import com.example.news_portal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -39,4 +42,12 @@ public class NewsService {
         newsRepository.delete(news);
         return new SimpleResponse("News deleted successfully");
     }
+
+    public NewsResponse getById(Long id) {
+        News news = newsRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("News not found"));
+        return newsRepository.getNews(news.getId());
+    }
+
+
 }
