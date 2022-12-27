@@ -2,6 +2,7 @@ package com.example.news_portal.service;
 
 import com.example.news_portal.dto.request.NewsRequest;
 import com.example.news_portal.dto.response.NewsResponse;
+import com.example.news_portal.dto.response.SimpleResponse;
 import com.example.news_portal.entity.News;
 import com.example.news_portal.entity.User;
 import com.example.news_portal.exception.NotFoundException;
@@ -27,11 +28,15 @@ public class NewsService {
         return newsRepository.getNews(news.getId());
     }
 
-    public NewsResponse delete(Long id) {
+    public SimpleResponse delete(Long id) {
         News news = newsRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("News not found"));
         User user = newsRepository.getUserByNewsId(news.getPublisher().getId())
                 .orElseThrow(() -> new NotFoundException("User not found"));
-        return null;
+        user.getMyPublications().remove(news);
+        news.setPublisher(null);
+        news.setElected(null);
+        newsRepository.delete(news);
+        return new SimpleResponse("News deleted successfully");
     }
 }
