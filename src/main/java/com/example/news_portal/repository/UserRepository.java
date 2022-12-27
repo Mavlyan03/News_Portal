@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query("select u from User u where u.name = :name")
+    @Query("select u from User u where u.nickname = :name")
     Optional<User> findByName(String name);
 }

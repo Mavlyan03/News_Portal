@@ -1,5 +1,6 @@
 package com.example.news_portal.api;
 
+import com.example.news_portal.dto.request.SignInRequest;
 import com.example.news_portal.dto.request.SignUpRequest;
 import com.example.news_portal.dto.response.AuthResponse;
 import com.example.news_portal.service.UserService;
@@ -22,5 +23,11 @@ public class AuthApi {
             description = "User can sign up")
     public AuthResponse signUp(@RequestBody SignUpRequest signUpRequest) {
         return userService.registration(signUpRequest);
+    }
+
+    @PostMapping("/sign_in")
+    @Operation(summary = "Sign In",description = "User can sig in")
+    public AuthResponse signIn(@RequestBody SignInRequest signInRequest) {
+        return userService.login(signInRequest);
     }
 }
