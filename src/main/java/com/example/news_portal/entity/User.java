@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -35,19 +36,19 @@ public class User implements UserDetails {
     private Role role;
 
     @OneToMany(cascade = ALL,mappedBy = "publisher")
-    private List<News> myPublications;
+    private List<News> myPublications = new ArrayList<>();
 
     @ManyToMany(cascade = {
             REFRESH,
             MERGE,
             DETACH})
-    private List<News> favorites;
+    private List<News> favorites = new ArrayList<>();
 
     @ManyToMany(cascade = {
             REFRESH,
             MERGE,
             DETACH}, mappedBy = "users")
-    private List<Comment> myComments;
+    private List<Comment> myComments = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

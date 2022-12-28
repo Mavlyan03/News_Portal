@@ -1,5 +1,6 @@
 package com.example.news_portal.entity;
 
+import com.example.news_portal.dto.request.NewsRequest;
 import com.example.news_portal.entity.enums.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,4 +46,12 @@ public class News {
             MERGE,
             DETACH})
     private User publisher;
+
+    public News(NewsRequest request) {
+        this.header = request.getHeader();
+        this.shortDescription = request.getDescription();
+        this.textNews = request.getText();
+        this.news_cover = request.getImage();
+        this.category = request.getCategory();
+    }
 }
