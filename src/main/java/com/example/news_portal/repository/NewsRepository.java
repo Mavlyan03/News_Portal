@@ -31,4 +31,13 @@ public interface NewsRepository extends JpaRepository<News, Long> {
             "n.news_cover," +
             "n.publicationDate) from News n where n.publisher.id <> :id")
     List<NewsResponse> getAllNews(Long id);
+
+    @Query("select new com.example.news_portal.dto.response.NewsResponse(" +
+            "n.id," +
+            "n.header," +
+            "n.shortDescription," +
+            "n.textNews," +
+            "n.news_cover," +
+            "n.publicationDate) from News n where n.publisher.id = :id")
+    List<NewsResponse> getMyPublications(Long id);
 }

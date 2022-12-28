@@ -44,14 +44,15 @@ public class NewsService {
         return new SimpleResponse("News deleted successfully");
     }
 
-    
     public List<NewsResponse> getAllNews(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         User user1 = userRepository.findById(user.getId()).orElseThrow(
                 () -> new NotFoundException("User not found"));
         return newsRepository.getAllNews(user1.getId());
     }
-    
+
+
+
     public NewsResponse getById(Long id) {
         News news = newsRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("News not found"));
