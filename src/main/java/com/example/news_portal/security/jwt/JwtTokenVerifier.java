@@ -23,6 +23,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 
     private final JwtTokenUtil jwtTokenUtil;
     private final UserRepository userRepository;
+
     public static final String AUTHORIZATION = "Authorization";
     public static final String BEARER = "Bearer ";
 
@@ -31,7 +32,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        Optional<String> optional = getJWTFromRequest(request);
+        Optional<String> optional = getJwtFromRequest(request);
 
         optional.ifPresent(token -> {
                     String email = jwtTokenUtil.validateJWTToken(token);
@@ -52,7 +53,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private Optional<String> getJWTFromRequest(HttpServletRequest request) {
+    private Optional<String> getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader(AUTHORIZATION);
 
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER)) {
