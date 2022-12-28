@@ -20,7 +20,7 @@ public interface NewsRepository extends JpaRepository<News, Long> {
             "n.publicationDate) from News n where n.id = ?1")
     NewsResponse getNews(Long id);
 
-    @Query("select User from News n where n.publisher.id = ?1")
+    @Query("select n.publisher from News n where n.publisher.id = :id")
     Optional<User> getUserByNewsId(Long id);
 
     @Query("select new com.example.news_portal.dto.response.NewsResponse(" +
@@ -29,7 +29,7 @@ public interface NewsRepository extends JpaRepository<News, Long> {
             "n.shortDescription," +
             "n.textNews," +
             "n.news_cover," +
-            "n.publicationDate) from News n where n.publisher.id <> :id")
+            "n.publicationDate) from News n where n.publisher.id <> ?1")
     List<NewsResponse> getAllNews(Long id);
 
     @Query("select new com.example.news_portal.dto.response.NewsResponse(" +
@@ -38,6 +38,6 @@ public interface NewsRepository extends JpaRepository<News, Long> {
             "n.shortDescription," +
             "n.textNews," +
             "n.news_cover," +
-            "n.publicationDate) from News n where n.publisher.id = :id")
+            "n.publicationDate) from News n where n.publisher.id = ?1")
     List<NewsResponse> getMyPublications(Long id);
 }

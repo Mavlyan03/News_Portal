@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/news")
-@CrossOrigin(origins = "*",maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Tag(name = "News API", description = "USER news endpoints")
 public class NewsApi {
 
@@ -53,6 +53,6 @@ public class NewsApi {
     @Operation(summary = "Get all my publications",
             description = "User get all publications")
     public List<NewsResponse> getMyPublications(Authentication authentication) {
-         return newsService.getMyPublications(authentication);
+        return newsService.getMyPublications(authentication);
     }
 }
