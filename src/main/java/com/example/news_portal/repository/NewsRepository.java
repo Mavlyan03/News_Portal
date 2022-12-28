@@ -6,6 +6,7 @@ import com.example.news_portal.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface NewsRepository extends JpaRepository<News, Long> {
@@ -21,4 +22,13 @@ public interface NewsRepository extends JpaRepository<News, Long> {
 
     @Query("select User from News n where n.publisher.id = ?1")
     Optional<User> getUserByNewsId(Long id);
+
+    @Query("select new com.example.news_portal.dto.response.NewsResponse(" +
+            "n.id," +
+            "n.header," +
+            "n.shortDescription," +
+            "n.textNews," +
+            "n.news_cover," +
+            "n.publicationDate) from News n where n.publisher.id <> :id")
+    List<NewsResponse> getAllNews(Long id);
 }
