@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class NewsService {
 
     public NewsResponse save(NewsRequest newsRequest) {
         News news = new News(newsRequest);
+        news.setPublicationDate(LocalDate.now());
         User publisher = userRepository.findById(newsRequest.getPublisherId())
                 .orElseThrow(() -> new NotFoundException("Publisher not found"));
         publisher.getMyPublications().add(news);
