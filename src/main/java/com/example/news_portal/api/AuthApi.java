@@ -36,18 +36,4 @@ public class AuthApi {
     public AuthResponse signIn(@RequestBody SignInRequest signInRequest) {
         return userService.login(signInRequest);
     }
-
-    @GetMapping("/my")
-    @Operation(summary = "Get all my publications",
-            description = "User get all publications")
-    public List<NewsResponse> getMyPublications(Authentication authentication) {
-        return userService.getMyPublications(authentication);
-    }
-
-    @PutMapping
-    @Operation(summary = "Update profile",
-            description = "User can update his profile")
-    public UpdateProfileResponse update(@RequestBody UpdateProfileRequest request) {
-        return userService.update(request);
-    }
 }

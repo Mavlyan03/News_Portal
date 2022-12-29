@@ -92,10 +92,10 @@ public class UserService {
                 request.getPhoto());
         return new UpdateProfileResponse(
                 user.getId(),
-                user.getName(),
-                user.getSurname(),
-                user.getNickname(),
-                user.getPhoto());
+                request.getName(),
+                request.getSurname(),
+                request.getNickname(),
+                request.getPhoto());
     }
 
     public List<NewsResponse> getMyPublications(Authentication authentication) {
