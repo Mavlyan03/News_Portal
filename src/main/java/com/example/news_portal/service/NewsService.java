@@ -61,7 +61,6 @@ public class NewsService {
 //        return newsRepository.getMyPublications(user1.getId());
 //    }
 
-
     public NewsResponse getById(Long id) {
         News news = newsRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("News not found"));

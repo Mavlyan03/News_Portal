@@ -2,10 +2,7 @@ package com.example.news_portal.service;
 
 import com.example.news_portal.dto.request.SignInRequest;
 import com.example.news_portal.dto.request.SignUpRequest;
-import com.example.news_portal.dto.request.UpdateProfileRequest;
 import com.example.news_portal.dto.response.AuthResponse;
-import com.example.news_portal.dto.response.NewsResponse;
-import com.example.news_portal.dto.response.UpdateProfileResponse;
 import com.example.news_portal.entity.User;
 import com.example.news_portal.entity.enums.Role;
 import com.example.news_portal.exception.BadRequestException;
@@ -19,8 +16,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -79,30 +74,6 @@ public class UserService {
                 .surname(request.getSurname())
                 .nickname(request.getNickname())
                 .build();
-    }
-
-    public UpdateProfileResponse update(UpdateProfileRequest request) {
-        User user = userRepository.findById(request.getId()).orElseThrow(
-                () -> new NotFoundException("User not found"));
-        userRepository.updateProfile(
-                request.getId(),
-                request.getName(),
-                request.getSurname(),
-                request.getNickname(),
-                request.getPhoto());
-        return new UpdateProfileResponse(
-                user.getId(),
-                request.getName(),
-                request.getSurname(),
-                request.getNickname(),
-                request.getPhoto());
-    }
-
-    public List<NewsResponse> getMyPublications(Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
-        User user1 = userRepository.findById(user.getId()).orElseThrow(
-                () -> new NotFoundException("User not found"));
-        return newsRepository.getMyPublications(user1.getId());
     }
 
 }
