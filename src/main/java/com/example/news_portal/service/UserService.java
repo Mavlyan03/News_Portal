@@ -2,11 +2,15 @@ package com.example.news_portal.service;
 
 import com.example.news_portal.dto.request.SignInRequest;
 import com.example.news_portal.dto.request.SignUpRequest;
+import com.example.news_portal.dto.request.UpdateProfileRequest;
 import com.example.news_portal.dto.response.AuthResponse;
+import com.example.news_portal.dto.response.NewsResponse;
+import com.example.news_portal.dto.response.UpdateProfileResponse;
 import com.example.news_portal.entity.User;
 import com.example.news_portal.entity.enums.Role;
 import com.example.news_portal.exception.BadRequestException;
 import com.example.news_portal.exception.NotFoundException;
+import com.example.news_portal.repository.NewsRepository;
 import com.example.news_portal.repository.UserRepository;
 import com.example.news_portal.security.jwt.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +20,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -24,6 +30,7 @@ public class UserService {
     private final JwtTokenUtil jwtTokenUtil;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final NewsRepository newsRepository;
 
     public AuthResponse registration(SignUpRequest signUpRequest) {
         User user = convertToRegisterEntity(signUpRequest);
@@ -73,4 +80,30 @@ public class UserService {
                 .nickname(request.getNickname())
                 .build();
     }
+
+    public UpdateProfileResponse update(UpdateProfileRequest request) {
+        User user = userRepository.findById(request.getId()).orElseThrow(
+                () -> new NotFoundException("User not found"));
+        userRepository.updateProfile(
+                user.getId(),
+                user.getName(),
+                user.getSurname(),
+                user.getNickname(),
+                user.getPhoto());
+        return new UpdateProfileResponse(
+                user.getId(),
+                user.getName(),
+                user.getSurname(),
+                user.getNickname(),
+                user.getPhoto());
+    }
+
+    public List<NewsResponse> getMyPublications(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        User user1 = userRepository.findById(user.getId()).orElseThrow(
+                () -> new NotFoundException("User not found"));
+        return newsRepository.getMyPublications(user1.getId());
+    }
+
+
 }

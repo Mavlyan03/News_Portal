@@ -54,12 +54,12 @@ public class NewsService {
     }
 
 
-    public List<NewsResponse> getMyPublications(Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
-        User user1 = userRepository.findById(user.getId()).orElseThrow(
-                () -> new NotFoundException("User not found"));
-        return newsRepository.getMyPublications(user1.getId());
-    }
+//    public List<NewsResponse> getMyPublications(Authentication authentication) {
+//        User user = (User) authentication.getPrincipal();
+//        User user1 = userRepository.findById(user.getId()).orElseThrow(
+//                () -> new NotFoundException("User not found"));
+//        return newsRepository.getMyPublications(user1.getId());
+//    }
 
 
     public NewsResponse getById(Long id) {

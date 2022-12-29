@@ -51,10 +51,10 @@ public class NewsApi {
         return newsService.getAllNews(authentication);
     }
 
-    @GetMapping("/my")
-    @Operation(summary = "Get all my publications",
-            description = "User get all publications")
-    public List<NewsResponse> getMyPublications(Authentication authentication) {
-        return newsService.getMyPublications(authentication);
-    }
+//    @GetMapping("/my")
+//    @Operation(summary = "Get all my publications",
+//            description = "User get all publications")
+//    public List<NewsResponse> getMyPublications(Authentication authentication) {
+//        return newsService.getMyPublications(authentication);
+//    }
 }
