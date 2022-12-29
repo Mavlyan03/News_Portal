@@ -85,11 +85,11 @@ public class UserService {
         User user = userRepository.findById(request.getId()).orElseThrow(
                 () -> new NotFoundException("User not found"));
         userRepository.updateProfile(
-                user.getId(),
-                user.getName(),
-                user.getSurname(),
-                user.getNickname(),
-                user.getPhoto());
+                request.getId(),
+                request.getName(),
+                request.getSurname(),
+                request.getNickname(),
+                request.getPhoto());
         return new UpdateProfileResponse(
                 user.getId(),
                 user.getName(),
