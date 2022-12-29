@@ -105,5 +105,4 @@ public class UserService {
         return newsRepository.getMyPublications(user1.getId());
     }
 
-
 }
