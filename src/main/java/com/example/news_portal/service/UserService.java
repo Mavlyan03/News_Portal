@@ -7,6 +7,7 @@ import com.example.news_portal.entity.User;
 import com.example.news_portal.entity.enums.Role;
 import com.example.news_portal.exception.BadRequestException;
 import com.example.news_portal.exception.NotFoundException;
+import com.example.news_portal.repository.NewsRepository;
 import com.example.news_portal.repository.UserRepository;
 import com.example.news_portal.security.jwt.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class UserService {
     private final JwtTokenUtil jwtTokenUtil;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final NewsRepository newsRepository;
 
     public AuthResponse registration(SignUpRequest signUpRequest) {
         User user = convertToRegisterEntity(signUpRequest);
@@ -73,4 +75,5 @@ public class UserService {
                 .nickname(request.getNickname())
                 .build();
     }
+
 }
