@@ -23,12 +23,17 @@ public class ProfileService {
     public UpdateProfileResponse update(UpdateProfileRequest request) {
         User user = userRepository.findById(request.getId()).orElseThrow(
                 () -> new NotFoundException("User not found"));
-        userRepository.updateProfile(
-                request.getId(),
-                request.getName(),
-                request.getSurname(),
-                request.getNickname(),
-                request.getPhoto());
+        user.setName(request.getName());
+        user.setSurname(request.getSurname());
+        user.setNickname(request.getNickname());
+        user.setPhoto(request.getPhoto());
+        userRepository.save(user);
+//        userRepository.updateProfile(
+//                request.getId(),
+//                request.getName(),
+//                request.getSurname(),
+//                request.getNickname(),
+//                request.getPhoto());
         return new UpdateProfileResponse(
                 user.getId(),
                 request.getName(),

@@ -2,18 +2,12 @@ package com.example.news_portal.api;
 
 import com.example.news_portal.dto.request.SignInRequest;
 import com.example.news_portal.dto.request.SignUpRequest;
-import com.example.news_portal.dto.request.UpdateProfileRequest;
 import com.example.news_portal.dto.response.AuthResponse;
-import com.example.news_portal.dto.response.NewsResponse;
-import com.example.news_portal.dto.response.UpdateProfileResponse;
 import com.example.news_portal.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
