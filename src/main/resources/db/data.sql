@@ -13,3 +13,7 @@ INSERT INTO comments(id, comment, date_of_comment, news_id)
 VALUES (1, 'The best news', '2022/11/21', 1),
        (2, 'I dont like this news', '2022/12/29', 2);
 
+INSERT INTO comments_users(my_commnets_id, users_id)
+VALUES (1, 1),
+       (2, 2);
+

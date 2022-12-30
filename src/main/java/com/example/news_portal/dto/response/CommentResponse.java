@@ -1,6 +1,7 @@
 package com.example.news_portal.dto.response;
 
 import com.example.news_portal.model.Comment;
+import com.example.news_portal.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,9 +17,9 @@ public class CommentResponse {
     private String comment;
     private LocalDate commentedAt;
 
-    public CommentResponse(Comment comment) {
+    public CommentResponse(Comment comment, User user) {
         this.id = comment.getId();
-        this.fullName = comment.getUser().getName() + " " + comment.getUser().getSurname();
+        this.fullName = user.getName() + " " + user.getSurname();
         this.comment = comment.getComment();
         this.commentedAt = comment.getDateOfComment();
     }

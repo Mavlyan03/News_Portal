@@ -62,7 +62,9 @@ public class NewsService {
         List<CommentResponse> comments = new ArrayList<>();
         for(Comment comment : news.getComments()) {
             if(comment != null) {
-                comments.add(new CommentResponse(comment));
+                User user = userRepository.findById(comment.getUser().getId())
+                        .orElseThrow(() -> new NotFoundException("User not found"));
+                comments.add(new CommentResponse(comment, user));
             }
         }
         NewsInnerPageResponse newsInnerPageResponse = newsRepository.getNewsById(news.getId());
