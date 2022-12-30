@@ -1,8 +1,11 @@
 package com.example.news_portal.service;
 
 import com.example.news_portal.dto.request.NewsRequest;
+import com.example.news_portal.dto.response.CommentResponse;
+import com.example.news_portal.dto.response.NewsInnerPageResponse;
 import com.example.news_portal.dto.response.NewsResponse;
 import com.example.news_portal.dto.response.SimpleResponse;
+import com.example.news_portal.model.Comment;
 import com.example.news_portal.model.News;
 import com.example.news_portal.model.User;
 import com.example.news_portal.exception.NotFoundException;
@@ -13,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -56,5 +60,15 @@ public class NewsService {
         News news = newsRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("News not found"));
         return newsRepository.getNews(news.getId());
+    }
+
+    public NewsInnerPageResponse getNewsById(Long id) {
+        News news = newsRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("News not found"));
+        List<CommentResponse> comments = new ArrayList<>();
+        for(Comment comment : news.getComments()) {
+            comments.add(new CommentResponse(comment));
+        }
+        return null;
     }
 }

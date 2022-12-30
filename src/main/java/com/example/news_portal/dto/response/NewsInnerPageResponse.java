@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-public class NewsPageResponse {
+public class NewsInnerPageResponse {
     private Long id;
     private String header;
     private String description;
@@ -18,4 +18,13 @@ public class NewsPageResponse {
     private String image;
     private LocalDate publicationDate;
     private List<CommentResponse> comments;
+
+    public NewsInnerPageResponse(Long id, String header, String description, String text, String image, LocalDate publicationDate) {
+        this.id = id;
+        this.header = header;
+        this.description = description;
+        this.text = text;
+        this.image = image;
+        this.publicationDate = publicationDate;
+    }
 }
