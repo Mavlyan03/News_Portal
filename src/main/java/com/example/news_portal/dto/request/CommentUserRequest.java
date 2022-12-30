@@ -7,5 +7,6 @@ import lombok.Setter;
 @Setter
 public class CommentUserRequest {
     private Long id;
+    private Long userId;
     private String comment;
 }
