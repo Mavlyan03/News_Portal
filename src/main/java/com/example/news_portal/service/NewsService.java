@@ -52,14 +52,6 @@ public class NewsService {
         return newsRepository.getAllNews(user1.getId());
     }
 
-
-//    public List<NewsResponse> getMyPublications(Authentication authentication) {
-//        User user = (User) authentication.getPrincipal();
-//        User user1 = userRepository.findById(user.getId()).orElseThrow(
-//                () -> new NotFoundException("User not found"));
-//        return newsRepository.getMyPublications(user1.getId());
-//    }
-
     public NewsResponse getById(Long id) {
         News news = newsRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("News not found"));
