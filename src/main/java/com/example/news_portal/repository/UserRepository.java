@@ -1,8 +1,6 @@
 package com.example.news_portal.repository;
 
-import com.example.news_portal.dto.request.UpdateProfileRequest;
-import com.example.news_portal.dto.response.UpdateProfileResponse;
-import com.example.news_portal.entity.User;
+import com.example.news_portal.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

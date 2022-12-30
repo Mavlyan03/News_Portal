@@ -1,4 +1,4 @@
-package com.example.news_portal.entity;
+package com.example.news_portal.model;
 
 
 import lombok.Getter;

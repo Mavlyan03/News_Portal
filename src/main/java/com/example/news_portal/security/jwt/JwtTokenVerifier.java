@@ -1,6 +1,6 @@
 package com.example.news_portal.security.jwt;
 
-import com.example.news_portal.entity.User;
+import com.example.news_portal.model.User;
 import com.example.news_portal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

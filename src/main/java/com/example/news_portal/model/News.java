@@ -1,7 +1,7 @@
-package com.example.news_portal.entity;
+package com.example.news_portal.model;
 
 import com.example.news_portal.dto.request.NewsRequest;
-import com.example.news_portal.entity.enums.Category;
+import com.example.news_portal.model.enums.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
