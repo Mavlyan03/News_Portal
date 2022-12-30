@@ -18,8 +18,8 @@ public class CommentResponse {
 
     public CommentResponse(Comment comment) {
         this.id = comment.getId();
+        this.fullName = comment.getUser().getName() + " " + comment.getUser().getSurname();
         this.comment = comment.getComment();
         this.commentedAt = comment.getDateOfComment();
     }
-
 }

@@ -56,19 +56,17 @@ public class NewsService {
         return newsRepository.getAllNews(user1.getId());
     }
 
-    public NewsResponse getById(Long id) {
-        News news = newsRepository.findById(id).orElseThrow(
-                () -> new NotFoundException("News not found"));
-        return newsRepository.getNews(news.getId());
-    }
-
-    public NewsInnerPageResponse getNewsById(Long id) {
+    public NewsInnerPageResponse getById(Long id) {
         News news = newsRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("News not found"));
         List<CommentResponse> comments = new ArrayList<>();
         for(Comment comment : news.getComments()) {
-            comments.add(new CommentResponse(comment));
+            if(comment != null) {
+                comments.add(new CommentResponse(comment));
+            }
         }
-        return null;
+        NewsInnerPageResponse newsInnerPageResponse = newsRepository.getNewsById(news.getId());
+        newsInnerPageResponse.setComments(comments);
+        return newsInnerPageResponse;
     }
 }
