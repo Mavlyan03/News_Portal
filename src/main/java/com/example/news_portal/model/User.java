@@ -44,10 +44,10 @@ public class User implements UserDetails {
             DETACH})
     private List<News> favorites = new ArrayList<>();
 
-    @ManyToMany(cascade = {
+    @OneToMany(cascade = {
             REFRESH,
             MERGE,
-            DETACH}, mappedBy = "users")
+            DETACH}, mappedBy = "user")
     private List<Comment> myComments = new ArrayList<>();
 
     @Override
