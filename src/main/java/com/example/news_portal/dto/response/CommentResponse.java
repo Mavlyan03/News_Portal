@@ -9,10 +9,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
-public class NewsResponse {
+public class CommentResponse {
     private Long id;
-    private String header;
-    private String description;
-    private String image;
-    private LocalDate publicationDate;
+    private String comment;
+    private LocalDate commentedAt;
 }

@@ -15,7 +15,6 @@ public interface NewsRepository extends JpaRepository<News, Long> {
             "n.id," +
             "n.header," +
             "n.shortDescription," +
-            "n.textNews," +
             "n.news_cover," +
             "n.publicationDate) from News n where n.id = ?1")
     NewsResponse getNews(Long id);
@@ -27,7 +26,6 @@ public interface NewsRepository extends JpaRepository<News, Long> {
             "n.id," +
             "n.header," +
             "n.shortDescription," +
-            "n.textNews," +
             "n.news_cover," +
             "n.publicationDate) from News n where n.publisher.id <> ?1")
     List<NewsResponse> getAllNews(Long id);
@@ -36,7 +34,6 @@ public interface NewsRepository extends JpaRepository<News, Long> {
             "n.id," +
             "n.header," +
             "n.shortDescription," +
-            "n.textNews," +
             "n.news_cover," +
             "n.publicationDate) from News n where n.publisher.id = ?1")
     List<NewsResponse> getMyPublications(Long id);
