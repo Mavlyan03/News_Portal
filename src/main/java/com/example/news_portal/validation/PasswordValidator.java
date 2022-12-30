@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PasswordValidator implements ConstraintValidator<PasswordValid,String> {
+
     @Override
     public boolean isValid(String password,
                            ConstraintValidatorContext constraintValidatorContext) {
