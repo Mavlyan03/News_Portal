@@ -1,4 +1,4 @@
-package com.example.news_portal.entity.enums;
+package com.example.news_portal.model.enums;
 
 public enum Category {
     SPORT,

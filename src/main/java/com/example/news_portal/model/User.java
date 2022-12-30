@@ -1,6 +1,6 @@
-package com.example.news_portal.entity;
+package com.example.news_portal.model;
 
-import com.example.news_portal.entity.enums.Role;
+import com.example.news_portal.model.enums.Role;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

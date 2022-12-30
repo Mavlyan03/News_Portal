@@ -1,8 +1,8 @@
 package com.example.news_portal.repository;
 
 import com.example.news_portal.dto.response.NewsResponse;
-import com.example.news_portal.entity.News;
-import com.example.news_portal.entity.User;
+import com.example.news_portal.model.News;
+import com.example.news_portal.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

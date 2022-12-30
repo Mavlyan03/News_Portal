@@ -3,7 +3,7 @@ package com.example.news_portal.service;
 import com.example.news_portal.dto.request.UpdateProfileRequest;
 import com.example.news_portal.dto.response.NewsResponse;
 import com.example.news_portal.dto.response.UpdateProfileResponse;
-import com.example.news_portal.entity.User;
+import com.example.news_portal.model.User;
 import com.example.news_portal.exception.NotFoundException;
 import com.example.news_portal.repository.NewsRepository;
 import com.example.news_portal.repository.UserRepository;

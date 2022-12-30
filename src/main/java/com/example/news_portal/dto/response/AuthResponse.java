@@ -1,6 +1,6 @@
 package com.example.news_portal.dto.response;
 
-import com.example.news_portal.entity.enums.Role;
+import com.example.news_portal.model.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
