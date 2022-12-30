@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/auth")
@@ -21,7 +23,7 @@ public class AuthApi {
     @PostMapping("/sing_up")
     @Operation(summary = "Sign Up",
             description = "User can sign up")
-    public AuthResponse signUp(@RequestBody SignUpRequest signUpRequest) {
+    public AuthResponse signUp(@RequestBody @Valid SignUpRequest signUpRequest) {
         return userService.registration(signUpRequest);
     }
 
