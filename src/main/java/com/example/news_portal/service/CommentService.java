@@ -45,7 +45,6 @@ public class CommentService {
         commentRepository.save(comment);
         NewsInnerPageResponse newsInnerPage = newsRepository.getNewsById(news.getId());
         List<CommentResponse> comments = commentRepository.getCommentsByNewsId(news.getId());
-        comments.add(new CommentResponse(comment, user));
         newsInnerPage.setComments(comments);
         return newsInnerPage;
     }
