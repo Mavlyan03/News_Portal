@@ -1,6 +1,7 @@
 package com.example.news_portal.service;
 
 import com.example.news_portal.dto.request.CommentRequest;
+import com.example.news_portal.dto.response.CommentResponse;
 import com.example.news_portal.dto.response.NewsInnerPageResponse;
 import com.example.news_portal.exception.NotFoundException;
 import com.example.news_portal.model.Comment;
@@ -13,6 +14,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +43,11 @@ public class CommentService {
         comment.setNews(news);
         news.getComments().add(comment);
         commentRepository.save(comment);
-        return null;
+        NewsInnerPageResponse newsInnerPage = newsRepository.getNewsById(news.getId());
+        List<CommentResponse> comments = commentRepository.getCommentsByNewsId(news.getId());
+        comments.add(new CommentResponse(comment, user));
+        newsInnerPage.setComments(comments);
+        return newsInnerPage;
     }
+
 }
