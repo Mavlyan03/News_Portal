@@ -1,5 +1,6 @@
 package com.example.news_portal.repository;
 
+import com.example.news_portal.dto.response.NewsInnerPageResponse;
 import com.example.news_portal.dto.response.NewsResponse;
 import com.example.news_portal.model.News;
 import com.example.news_portal.model.User;
@@ -15,10 +16,18 @@ public interface NewsRepository extends JpaRepository<News, Long> {
             "n.id," +
             "n.header," +
             "n.shortDescription," +
-            "n.textNews," +
             "n.news_cover," +
             "n.publicationDate) from News n where n.id = ?1")
     NewsResponse getNews(Long id);
+
+    @Query("select new com.example.news_portal.dto.response.NewsInnerPageResponse(" +
+            "n.id," +
+            "n.header," +
+            "n.shortDescription," +
+            "n.textNews," +
+            "n.news_cover," +
+            "n.publicationDate) from News n where n.id = :id")
+    NewsInnerPageResponse getNewsById(Long id);
 
     @Query("select n.publisher from News n where n.publisher.id = :id")
     Optional<User> getUserByNewsId(Long id);
@@ -27,7 +36,6 @@ public interface NewsRepository extends JpaRepository<News, Long> {
             "n.id," +
             "n.header," +
             "n.shortDescription," +
-            "n.textNews," +
             "n.news_cover," +
             "n.publicationDate) from News n where n.publisher.id <> ?1")
     List<NewsResponse> getAllNews(Long id);
@@ -36,7 +44,6 @@ public interface NewsRepository extends JpaRepository<News, Long> {
             "n.id," +
             "n.header," +
             "n.shortDescription," +
-            "n.textNews," +
             "n.news_cover," +
             "n.publicationDate) from News n where n.publisher.id = ?1")
     List<NewsResponse> getMyPublications(Long id);

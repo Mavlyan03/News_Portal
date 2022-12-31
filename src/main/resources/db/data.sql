@@ -7,9 +7,9 @@ VALUES (1, 'Mavlyan', 'Sadirov', 'Mav', '$2a$12$5f6qb7Tz.vXoMQpw4rMAFuaM8zfXGTRs
 INSERT INTO news(id, header, news_cover, short_description, text_news, publication_date, category, publisher_id)
 VALUES (1, 'World Championship', 'cw.com', 'About world of championship', 'Argentina won championship', '2022/12/31',
         'SPORT', 1),
-       (2, 'UFC', 'ufc.com', 'Mahachev champion', 'Mahachev against Oliveira', '2022/12/21', 'ART', 1);
+       (2, 'UFC', 'ufc.com', 'Mahachev champion', 'Mahachev against Oliveira', '2022/12/21',
+        'ART', 1);
 
-INSERT INTO comments(id, comment, date_of_comment, news_id)
-VALUES (1, 'The best news', '2022/11/21', 1),
-       (2, 'I dont like this news', '2022/12/29', 2);
-
+INSERT INTO comments(id, comment, date_of_comment, news_id, user_id)
+VALUES (1, 'The best news', '2022/11/21', 1, 1),
+       (2, 'I dont like this news', '2022/12/29', 2, 2);

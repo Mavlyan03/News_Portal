@@ -28,12 +28,6 @@ public class ProfileService {
         user.setNickname(request.getNickname());
         user.setPhoto(request.getPhoto());
         userRepository.save(user);
-//        userRepository.updateProfile(
-//                request.getId(),
-//                request.getName(),
-//                request.getSurname(),
-//                request.getNickname(),
-//                request.getPhoto());
         return new UpdateProfileResponse(
                 user.getId(),
                 request.getName(),

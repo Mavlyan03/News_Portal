@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 import static javax.persistence.CascadeType.*;
 
@@ -25,11 +24,11 @@ public class Comment {
     private String comment;
     private LocalDate dateOfComment;
 
-    @ManyToMany(cascade = {
+    @ManyToOne(cascade = {
             REFRESH,
             MERGE,
             DETACH})
-    private List<User> users;
+    private User user;
 
     @ManyToOne(cascade = {
             REFRESH,

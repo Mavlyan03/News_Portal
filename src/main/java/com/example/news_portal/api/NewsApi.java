@@ -1,6 +1,7 @@
 package com.example.news_portal.api;
 
 import com.example.news_portal.dto.request.NewsRequest;
+import com.example.news_portal.dto.response.NewsInnerPageResponse;
 import com.example.news_portal.dto.response.NewsResponse;
 import com.example.news_portal.dto.response.SimpleResponse;
 import com.example.news_portal.service.NewsService;
@@ -40,7 +41,7 @@ public class NewsApi {
     @GetMapping("/{id}")
     @Operation(summary = "Get by id",
             description = "Get a news by id")
-    public NewsResponse getById(@PathVariable Long id) {
+    public NewsInnerPageResponse getById(@PathVariable Long id) {
         return newsService.getById(id);
     }
 
@@ -50,11 +51,4 @@ public class NewsApi {
     public List<NewsResponse> getAllNews(Authentication authentication) {
         return newsService.getAllNews(authentication);
     }
-
-//    @GetMapping("/my")
-//    @Operation(summary = "Get all my publications",
-//            description = "User get all publications")
-//    public List<NewsResponse> getMyPublications(Authentication authentication) {
-//        return newsService.getMyPublications(authentication);
-//    }
 }
