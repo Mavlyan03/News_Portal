@@ -1,6 +1,7 @@
 package com.example.news_portal.model;
 
 
+import com.example.news_portal.dto.request.CommentRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,4 +36,9 @@ public class Comment {
             MERGE,
             DETACH})
     private News news;
+
+    public Comment(CommentRequest commentRequest) {
+        this.comment = commentRequest.getComment();
+        this.dateOfComment = LocalDate.now();
+    }
 }
