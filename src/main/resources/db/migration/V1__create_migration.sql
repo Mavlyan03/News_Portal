@@ -1,9 +1,6 @@
 drop table if exists users;
 drop table if exists comments;
 drop table if exists news;
-create sequence if not exists user_seq;
-create sequence if not exists news_seq;
-create sequence if not exists comment_seq;
 
 create table users
 (
@@ -44,4 +41,14 @@ create table comments
     user_id         bigserial
         constraint fk8omq0tc18jd43bu5tjh6jvraq
             references users
+);
+
+create table users_favorites
+(
+    elected_id   bigserial not null
+        constraint fkqewshplngegc1hyl8qma95sxr
+            references users,
+    favorites_id bigserial not null
+        constraint fksomuc7om8448ao3ltm66hsyb9
+            references news
 );

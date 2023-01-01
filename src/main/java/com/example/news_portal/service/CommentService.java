@@ -48,5 +48,4 @@ public class CommentService {
         newsInnerPage.setComments(comments);
         return newsInnerPage;
     }
-
 }
