@@ -42,3 +42,13 @@ create table comments
         constraint fk8omq0tc18jd43bu5tjh6jvraq
             references users
 );
+
+create table users_favorites
+(
+    elected_id   bigserial not null
+        constraint fkqewshplngegc1hyl8qma95sxr
+            references users,
+    favorites_id bigserial not null
+        constraint fksomuc7om8448ao3ltm66hsyb9
+            references news
+);
