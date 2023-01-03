@@ -14,8 +14,8 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/auth")
-@CrossOrigin(origins = "*",maxAge = 3600)
-@Tag(name = "Auth API",description = "Sign Up and Sign In")
+@CrossOrigin(origins = "*", maxAge = 3600)
+@Tag(name = "Auth API", description = "Sign Up and Sign In")
 public class AuthApi {
 
     private final UserService userService;
@@ -28,7 +28,7 @@ public class AuthApi {
     }
 
     @PostMapping("/sign_in")
-    @Operation(summary = "Sign In",description = "User can sig in")
+    @Operation(summary = "Sign In", description = "User can sig in")
     public AuthResponse signIn(@RequestBody SignInRequest signInRequest) {
         return userService.login(signInRequest);
     }

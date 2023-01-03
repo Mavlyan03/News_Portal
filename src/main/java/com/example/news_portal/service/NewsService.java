@@ -1,14 +1,15 @@
 package com.example.news_portal.service;
 
 import com.example.news_portal.dto.request.NewsRequest;
+import com.example.news_portal.dto.request.SelectRequest;
 import com.example.news_portal.dto.response.CommentResponse;
 import com.example.news_portal.dto.response.NewsInnerPageResponse;
 import com.example.news_portal.dto.response.NewsResponse;
 import com.example.news_portal.dto.response.SimpleResponse;
+import com.example.news_portal.exception.NotFoundException;
 import com.example.news_portal.model.Comment;
 import com.example.news_portal.model.News;
 import com.example.news_portal.model.User;
-import com.example.news_portal.exception.NotFoundException;
 import com.example.news_portal.repository.NewsRepository;
 import com.example.news_portal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,7 @@ public class NewsService {
         return userRepository.findByName(name).orElseThrow(
                 () -> new NotFoundException("User with name %s not found"));
     }
+
     public NewsResponse save(NewsRequest newsRequest) {
         News news = new News(newsRequest);
         news.setPublicationDate(LocalDate.now());
@@ -62,10 +64,10 @@ public class NewsService {
                 () -> new NotFoundException("User not found"));
         List<NewsResponse> allNews = newsRepository.getAllNews(user1.getId());
         List<NewsResponse> newsResponses = new ArrayList<>();
-        for(NewsResponse newsResponse : allNews) {
+        for (NewsResponse newsResponse : allNews) {
             News news = newsRepository.findById(newsResponse.getId()).orElseThrow(
                     () -> new NotFoundException("News not found"));
-            if(news.getSelect().contains(user1)) {
+            if (news.getSelect().contains(user1)) {
                 newsResponses.add(new NewsResponse(newsResponse, true));
             } else {
                 newsResponses.add(new NewsResponse(newsResponse, false));
@@ -78,8 +80,8 @@ public class NewsService {
         News news = newsRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("News not found"));
         List<CommentResponse> comments = new ArrayList<>();
-        for(Comment comment : news.getComments()) {
-            if(comment != null) {
+        for (Comment comment : news.getComments()) {
+            if (comment != null) {
                 User user = userRepository.findById(comment.getUser().getId())
                         .orElseThrow(() -> new NotFoundException("User not found"));
                 comments.add(new CommentResponse(comment, user));
@@ -87,12 +89,56 @@ public class NewsService {
         }
         User user = getAuthentication();
         NewsInnerPageResponse newsInnerPageResponse = newsRepository.getNewsById(news.getId());
-        if(news.getSelect().contains(user)) {
+        if (news.getSelect().contains(user)) {
             newsInnerPageResponse.setSelected(true);
         } else {
             newsInnerPageResponse.setSelected(false);
         }
         newsInnerPageResponse.setComments(comments);
+        return newsInnerPageResponse;
+    }
+
+    public List<NewsResponse> chooseFavorite(SelectRequest selectRequest) {
+        User user = getAuthentication();
+        List<NewsResponse> newsResponses = new ArrayList<>();
+        for (Long id : selectRequest.getNewsId()) {
+            News news = newsRepository.findById(id).orElseThrow(
+                    () -> new NotFoundException("News not found"));
+            if (news.getSelect().contains(user)) {
+                news.getSelect().remove(user);
+                user.getFavorites().remove(news);
+                newsResponses.add(new NewsResponse(news, false));
+            } else {
+                user.getFavorites().add(news);
+                news.getSelect().add(user);
+                newsResponses.add(new NewsResponse(news, true));
+            }
+        }
+        return newsResponses;
+    }
+
+    public NewsInnerPageResponse chooseFavoriteNews(Long id) {
+        User user = getAuthentication();
+        News news = newsRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("News not found"));
+        List<CommentResponse> comments = new ArrayList<>();
+        for (Comment comment : news.getComments()) {
+            if (comment != null) {
+                User user1 = userRepository.findById(comment.getUser().getId())
+                        .orElseThrow(() -> new NotFoundException("User not found"));
+                comments.add(new CommentResponse(comment, user1));
+            }
+        }
+        NewsInnerPageResponse newsInnerPageResponse = new NewsInnerPageResponse(news);
+        if (news.getSelect().contains(user)) {
+            news.getSelect().remove(user);
+            user.getFavorites().remove(news);
+            newsInnerPageResponse.setSelected(false);
+        } else {
+            news.getSelect().add(user);
+            user.getFavorites().add(news);
+            newsInnerPageResponse.setSelected(true);
+        }
         return newsInnerPageResponse;
     }
 }

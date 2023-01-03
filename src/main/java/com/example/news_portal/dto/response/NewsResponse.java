@@ -1,5 +1,6 @@
 package com.example.news_portal.dto.response;
 
+import com.example.news_portal.model.News;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +22,15 @@ public class NewsResponse {
         this.description = description;
         this.image = image;
         this.publicationDate = publicationDate;
+    }
+
+    public NewsResponse(News news, Boolean selected) {
+        this.id = news.getId();
+        this.header = news.getHeader();
+        this.description = news.getShortDescription();
+        this.image = news.getNews_cover();
+        this.publicationDate = news.getPublicationDate();
+        this.selected = selected;
     }
 
     public NewsResponse(NewsResponse newsResponse, Boolean selected) {

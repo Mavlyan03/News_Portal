@@ -9,5 +9,5 @@ import java.util.List;
 @Getter
 @Setter
 public class SelectRequest {
-    private List<News> newsId;
+    private List<Long> newsId;
 }
