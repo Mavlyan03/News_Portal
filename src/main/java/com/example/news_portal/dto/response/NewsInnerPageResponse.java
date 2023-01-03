@@ -17,6 +17,7 @@ public class NewsInnerPageResponse {
     private String text;
     private String image;
     private LocalDate publicationDate;
+    private Boolean selected;
     private List<CommentResponse> comments;
 
     public NewsInnerPageResponse(Long id, String header, String description, String text, String image, LocalDate publicationDate) {

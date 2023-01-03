@@ -25,7 +25,6 @@ public class UserService {
     private final JwtTokenUtil jwtTokenUtil;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-    private final NewsRepository newsRepository;
 
     public AuthResponse registration(SignUpRequest signUpRequest) {
         User user = convertToRegisterEntity(signUpRequest);

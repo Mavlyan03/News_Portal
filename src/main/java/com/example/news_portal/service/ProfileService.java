@@ -3,6 +3,7 @@ package com.example.news_portal.service;
 import com.example.news_portal.dto.request.UpdateProfileRequest;
 import com.example.news_portal.dto.response.NewsResponse;
 import com.example.news_portal.dto.response.UpdateProfileResponse;
+import com.example.news_portal.model.News;
 import com.example.news_portal.model.User;
 import com.example.news_portal.exception.NotFoundException;
 import com.example.news_portal.repository.NewsRepository;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,6 +42,17 @@ public class ProfileService {
         User user = (User) authentication.getPrincipal();
         User user1 = userRepository.findById(user.getId()).orElseThrow(
                 () -> new NotFoundException("User not found"));
-        return newsRepository.getMyPublications(user1.getId());
+        List<NewsResponse> myPublications = newsRepository.getMyPublications(user1.getId());
+        List<NewsResponse> myFavorites = new ArrayList<>();
+        for(NewsResponse newsResponse : myPublications) {
+            News news = newsRepository.findById(newsResponse.getId()).orElseThrow(
+                    () -> new NotFoundException("News not found"));
+            if(news.getSelect().contains(user1)) {
+                myFavorites.add(new NewsResponse(newsResponse, true));
+            } else {
+                myFavorites.add(new NewsResponse(newsResponse, false));
+            }
+        }
+        return myFavorites;
     }
 }

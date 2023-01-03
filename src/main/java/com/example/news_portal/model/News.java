@@ -39,7 +39,7 @@ public class News {
             REFRESH,
             MERGE,
             DETACH}, mappedBy = "favorites")
-    private List<User> elected;
+    private List<User> select;
 
     @ManyToOne(cascade = {
             REFRESH,
