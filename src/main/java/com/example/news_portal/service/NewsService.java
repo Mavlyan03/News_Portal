@@ -13,6 +13,7 @@ import com.example.news_portal.repository.NewsRepository;
 import com.example.news_portal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -26,6 +27,12 @@ public class NewsService {
     private final NewsRepository newsRepository;
     private final UserRepository userRepository;
 
+    private User getAuthentication() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String name = authentication.getName();
+        return userRepository.findByName(name).orElseThrow(
+                () -> new NotFoundException("User with name %s not found"));
+    }
     public NewsResponse save(NewsRequest newsRequest) {
         News news = new News(newsRequest);
         news.setPublicationDate(LocalDate.now());
@@ -67,7 +74,13 @@ public class NewsService {
                 comments.add(new CommentResponse(comment, user));
             }
         }
+        User user = getAuthentication();
         NewsInnerPageResponse newsInnerPageResponse = newsRepository.getNewsById(news.getId());
+        if(news.getSelect().contains(user)) {
+            newsInnerPageResponse.setSelected(true);
+        } else {
+            newsInnerPageResponse.setSelected(false);
+        }
         newsInnerPageResponse.setComments(comments);
         return newsInnerPageResponse;
     }
