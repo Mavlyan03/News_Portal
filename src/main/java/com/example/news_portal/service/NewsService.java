@@ -60,7 +60,18 @@ public class NewsService {
         User user = (User) authentication.getPrincipal();
         User user1 = userRepository.findById(user.getId()).orElseThrow(
                 () -> new NotFoundException("User not found"));
-        return newsRepository.getAllNews(user1.getId());
+        List<NewsResponse> allNews = newsRepository.getAllNews(user1.getId());
+        List<NewsResponse> newsResponses = new ArrayList<>();
+        for(NewsResponse newsResponse : allNews) {
+            News news = newsRepository.findById(newsResponse.getId()).orElseThrow(
+                    () -> new NotFoundException("News not found"));
+            if(news.getSelect().contains(user1)) {
+                newsResponses.add(new NewsResponse(newsResponse, true));
+            } else {
+                newsResponses.add(new NewsResponse(newsResponse, false));
+            }
+        }
+        return newsResponses;
     }
 
     public NewsInnerPageResponse getById(Long id) {
