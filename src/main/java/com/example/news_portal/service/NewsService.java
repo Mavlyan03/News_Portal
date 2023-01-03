@@ -44,7 +44,7 @@ public class NewsService {
                 .orElseThrow(() -> new NotFoundException("User not found"));
         user.getMyPublications().remove(news);
         news.setPublisher(null);
-        news.setElected(null);
+        news.setSelect(null);
         newsRepository.delete(news);
         return new SimpleResponse("News deleted successfully");
     }
