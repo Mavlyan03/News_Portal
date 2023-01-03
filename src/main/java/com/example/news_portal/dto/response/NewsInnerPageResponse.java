@@ -1,5 +1,6 @@
 package com.example.news_portal.dto.response;
 
+import com.example.news_portal.model.News;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,5 +28,14 @@ public class NewsInnerPageResponse {
         this.text = text;
         this.image = image;
         this.publicationDate = publicationDate;
+    }
+
+    public NewsInnerPageResponse(News news) {
+        this.id = news.getId();
+        this.header = news.getHeader();
+        this.description = news.getShortDescription();
+        this.text = news.getTextNews();
+        this.image = news.getNews_cover();
+        this.publicationDate = news.getPublicationDate();
     }
 }

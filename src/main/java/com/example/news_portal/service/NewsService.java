@@ -1,6 +1,7 @@
 package com.example.news_portal.service;
 
 import com.example.news_portal.dto.request.NewsRequest;
+import com.example.news_portal.dto.request.SelectRequest;
 import com.example.news_portal.dto.response.CommentResponse;
 import com.example.news_portal.dto.response.NewsInnerPageResponse;
 import com.example.news_portal.dto.response.NewsResponse;
@@ -93,6 +94,51 @@ public class NewsService {
             newsInnerPageResponse.setSelected(false);
         }
         newsInnerPageResponse.setComments(comments);
+        return newsInnerPageResponse;
+    }
+
+    public List<NewsResponse> chooseFavorite(SelectRequest selectRequest) {
+        User user = getAuthentication();
+        List<NewsResponse> newsResponses = new ArrayList<>();
+        for(Long id : selectRequest.getNewsId()) {
+            News news = newsRepository.findById(id).orElseThrow(
+                    () -> new NotFoundException("News not found"));
+            if(news.getSelect().contains(user)) {
+                news.getSelect().remove(user);
+                user.getFavorites().remove(news);
+                newsResponses.add(new NewsResponse(news, false));
+            }
+            else {
+                user.getFavorites().add(news);
+                news.getSelect().add(user);
+                newsResponses.add(new NewsResponse(news, true));
+            }
+        }
+        return newsResponses;
+    }
+
+    public NewsInnerPageResponse chooseFavoriteNews(Long id) {
+        User user = getAuthentication();
+        News news = newsRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("News not found"));
+        List<CommentResponse> comments = new ArrayList<>();
+        for(Comment comment : news.getComments()) {
+            if(comment != null) {
+                User user1 = userRepository.findById(comment.getUser().getId())
+                        .orElseThrow(() -> new NotFoundException("User not found"));
+                comments.add(new CommentResponse(comment, user1));
+            }
+        }
+        NewsInnerPageResponse newsInnerPageResponse = new NewsInnerPageResponse(news);
+        if(news.getSelect().contains(user)) {
+            news.getSelect().remove(user);
+            user.getFavorites().remove(news);
+            newsInnerPageResponse.setSelected(false);
+        } else {
+            news.getSelect().add(user);
+            user.getFavorites().add(news);
+            newsInnerPageResponse.setSelected(true);
+        }
         return newsInnerPageResponse;
     }
 }
