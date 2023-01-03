@@ -59,4 +59,11 @@ public class NewsApi {
     public List<NewsResponse> chooseFavorites(@RequestBody SelectRequest selectRequest) {
         return newsService.chooseFavorite(selectRequest);
     }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Choose favorite news inner page",
+            description = "User can choose his favorite news inner page")
+    public NewsInnerPageResponse chooseFavoriteNewsInnerPage(@PathVariable Long id) {
+        return newsService.chooseFavoriteNews(id);
+    }
 }
