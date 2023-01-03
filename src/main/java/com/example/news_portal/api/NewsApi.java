@@ -1,6 +1,7 @@
 package com.example.news_portal.api;
 
 import com.example.news_portal.dto.request.NewsRequest;
+import com.example.news_portal.dto.request.SelectRequest;
 import com.example.news_portal.dto.response.NewsInnerPageResponse;
 import com.example.news_portal.dto.response.NewsResponse;
 import com.example.news_portal.dto.response.SimpleResponse;
@@ -50,5 +51,12 @@ public class NewsApi {
             description = "Get all news")
     public List<NewsResponse> getAllNews(Authentication authentication) {
         return newsService.getAllNews(authentication);
+    }
+
+    @PutMapping
+    @Operation(summary = "Choose favorites news",
+            description = "User can choose his favorites news")
+    public List<NewsResponse> chooseFavorites(@RequestBody SelectRequest selectRequest) {
+        return newsService.chooseFavorite(selectRequest);
     }
 }
