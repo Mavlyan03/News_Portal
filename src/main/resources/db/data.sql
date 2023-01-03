@@ -13,3 +13,7 @@ VALUES (1, 'World Championship', 'cw.com', 'About world of championship', 'Argen
 INSERT INTO comments(id, comment, date_of_comment, news_id, user_id)
 VALUES (1, 'The best news', '2022/11/21', 1, 1),
        (2, 'I dont like this news', '2022/12/29', 2, 2);
+
+INSERT INTO users_favorites(select_id, favorites_id)
+VALUES (1, 1),
+       (2, 2);
