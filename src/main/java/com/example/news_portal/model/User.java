@@ -51,11 +51,11 @@ public class User implements UserDetails {
             DETACH}, mappedBy = "user")
     private List<Comment> myComments = new ArrayList<>();
 
-    @ManyToOne(cascade = {
+    @ManyToMany(cascade = {
             REFRESH,
             MERGE,
             DETACH})
-    private Comment comment;
+    private List<Comment> comments;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

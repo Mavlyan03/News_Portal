@@ -38,7 +38,10 @@ public class Comment {
             DETACH})
     private News news;
 
-    @OneToMany(cascade = ALL, mappedBy = "comment")
+    @ManyToMany(cascade = {
+            REFRESH,
+            MERGE,
+            DETACH}, mappedBy = "comments")
     private List<User> answers;
 
     public Comment(CommentRequest commentRequest) {
