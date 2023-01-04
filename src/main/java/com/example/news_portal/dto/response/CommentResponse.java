@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class CommentResponse {
     private Long id;
     private String fullName;
+    private String image;
     private String comment;
     private LocalDate commentedAt;
 

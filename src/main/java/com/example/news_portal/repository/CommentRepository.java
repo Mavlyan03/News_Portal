@@ -12,6 +12,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     @Query("select new com.example.news_portal.dto.response.CommentResponse(" +
             "c.id," +
             "concat(c.user.name,' ',c.user.surname)," +
+            "c.user.photo,"+
             "c.comment," +
             "c.dateOfComment) from Comment c where c.news.id = :id")
     List<CommentResponse> getCommentsByNewsId(Long id);
