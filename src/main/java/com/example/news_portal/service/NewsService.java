@@ -113,6 +113,7 @@ public class NewsService {
                 news.getSelect().add(user);
                 newsResponses.add(new NewsResponse(news, true));
             }
+            newsRepository.save(news);
         }
         return newsResponses;
     }
