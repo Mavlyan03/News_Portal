@@ -139,6 +139,7 @@ public class NewsService {
             user.getFavorites().add(news);
             newsInnerPageResponse.setSelected(true);
         }
+        newsInnerPageResponse.setComments(comments);
         return newsInnerPageResponse;
     }
 }

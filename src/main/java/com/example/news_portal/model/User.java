@@ -39,6 +39,7 @@ public class User implements UserDetails {
     private List<News> myPublications = new ArrayList<>();
 
     @ManyToMany(cascade = {
+            PERSIST,
             REFRESH,
             MERGE,
             DETACH})
