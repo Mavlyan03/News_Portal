@@ -107,7 +107,7 @@ public class NewsService {
             if (news.getSelect().contains(user)) {
                 news.getSelect().remove(user);
                 user.getFavorites().remove(news);
-                newsResponses.add(new NewsResponse(news, false));
+                newsResponses.add( new NewsResponse(news, false));
             } else {
                 user.getFavorites().add(news);
                 news.getSelect().add(user);
@@ -139,6 +139,20 @@ public class NewsService {
             user.getFavorites().add(news);
             newsInnerPageResponse.setSelected(true);
         }
+        newsInnerPageResponse.setComments(comments);
+        newsRepository.save(news);
         return newsInnerPageResponse;
+    }
+
+    public List<NewsResponse> getAllFavorites() {
+        User user = getAuthentication();
+        List<NewsResponse> allNews = new ArrayList<>();
+        List<News> all = newsRepository.findAll();
+        for(News news : all) {
+            if(news.getSelect().contains(user)) {
+                allNews.add(new NewsResponse(news, true));
+            }
+        }
+        return allNews;
     }
 }

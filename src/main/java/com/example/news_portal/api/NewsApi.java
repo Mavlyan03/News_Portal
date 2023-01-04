@@ -66,4 +66,11 @@ public class NewsApi {
     public NewsInnerPageResponse chooseFavoriteNewsInnerPage(@PathVariable Long id) {
         return newsService.chooseFavoriteNews(id);
     }
+
+    @GetMapping("/favorites")
+    @Operation(summary = "Get all my favorites news",
+            description = "User can get all favorites news")
+    public List<NewsResponse> getMyFavoritesNews() {
+        return newsService.getAllFavorites();
+    }
 }

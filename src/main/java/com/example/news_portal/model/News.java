@@ -36,6 +36,7 @@ public class News {
     private List<Comment> comments;
 
     @ManyToMany(cascade = {
+            PERSIST,
             REFRESH,
             MERGE,
             DETACH}, mappedBy = "favorites")
