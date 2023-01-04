@@ -142,4 +142,16 @@ public class NewsService {
         newsInnerPageResponse.setComments(comments);
         return newsInnerPageResponse;
     }
+
+    public List<NewsResponse> getAllFavorites() {
+        User user = getAuthentication();
+        List<NewsResponse> allNews = new ArrayList<>();
+        List<News> all = newsRepository.findAll();
+        for(News news : all) {
+            if(news.getSelect().contains(user)) {
+                allNews.add(new NewsResponse(news, true));
+            }
+        }
+        return allNews;
+    }
 }
