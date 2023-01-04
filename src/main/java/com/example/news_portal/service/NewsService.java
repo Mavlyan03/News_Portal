@@ -107,7 +107,7 @@ public class NewsService {
             if (news.getSelect().contains(user)) {
                 news.getSelect().remove(user);
                 user.getFavorites().remove(news);
-                newsResponses.add(new NewsResponse(news, false));
+                newsResponses.add( new NewsResponse(news, false));
             } else {
                 user.getFavorites().add(news);
                 news.getSelect().add(user);
@@ -140,6 +140,7 @@ public class NewsService {
             newsInnerPageResponse.setSelected(true);
         }
         newsInnerPageResponse.setComments(comments);
+        newsRepository.save(news);
         return newsInnerPageResponse;
     }
 
