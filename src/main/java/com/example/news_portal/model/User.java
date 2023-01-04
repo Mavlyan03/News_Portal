@@ -35,7 +35,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(cascade = ALL,mappedBy = "publisher")
+    @OneToMany(cascade = ALL, mappedBy = "publisher")
     private List<News> myPublications = new ArrayList<>();
 
     @ManyToMany(cascade = {
@@ -50,6 +50,12 @@ public class User implements UserDetails {
             MERGE,
             DETACH}, mappedBy = "user")
     private List<Comment> myComments = new ArrayList<>();
+
+    @ManyToOne(cascade = {
+            REFRESH,
+            MERGE,
+            DETACH})
+    private Comment comment;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
