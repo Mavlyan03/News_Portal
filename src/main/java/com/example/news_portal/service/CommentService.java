@@ -49,6 +49,11 @@ public class CommentService {
         NewsInnerPageResponse newsInnerPage = newsRepository.getNewsById(news.getId());
         List<CommentResponse> comments = commentRepository.getCommentsByNewsId(news.getId());
         newsInnerPage.setComments(comments);
+        if (news.getSelect().contains(user)) {
+            newsInnerPage.setSelected(true);
+        } else {
+            newsInnerPage.setSelected(false);
+        }
         return newsInnerPage;
     }
 
@@ -68,7 +73,23 @@ public class CommentService {
         commentRepository.save(comment);
         NewsInnerPageResponse newsInnerPage = newsRepository.getNewsById(news.getId());
         List<CommentResponse> comments = commentRepository.getCommentsByNewsId(news.getId());
+        for (CommentResponse commentResponse : comments) {
+            if (commentResponse.getId().equals(comment.getId())) {
+                commentResponse.getAnswers().add(
+                        new AnswerResponse(
+                                comment1.getId(),
+                                user.getName() + " " + user.getSurname(),
+                                user.getPhoto(),
+                                answerRequest.getComment(),
+                                LocalDate.now()));
+            }
+        }
         newsInnerPage.setComments(comments);
+        if (news.getSelect().contains(user)) {
+            newsInnerPage.setSelected(true);
+        } else {
+            newsInnerPage.setSelected(false);
+        }
         return newsInnerPage;
     }
 }
