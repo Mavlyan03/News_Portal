@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
@@ -42,10 +43,15 @@ public class Comment {
             REFRESH,
             MERGE,
             DETACH}, mappedBy = "comments")
-    private List<User> answers;
+    private List<User> answers = new ArrayList<>();
 
     public Comment(CommentRequest commentRequest) {
         this.comment = commentRequest.getComment();
         this.dateOfComment = LocalDate.now();
+    }
+
+    public Comment(String comment, LocalDate date) {
+        this.comment = comment;
+        this.dateOfComment = date;
     }
 }

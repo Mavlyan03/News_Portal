@@ -1,5 +1,6 @@
 package com.example.news_portal.api;
 
+import com.example.news_portal.dto.request.AnswerRequest;
 import com.example.news_portal.dto.request.CommentRequest;
 import com.example.news_portal.dto.response.NewsInnerPageResponse;
 import com.example.news_portal.service.CommentService;
@@ -27,5 +28,12 @@ public class CommentApi {
             description = "User can leave a comment")
     public NewsInnerPageResponse comment(CommentRequest commentRequest) {
         return commentService.comment(commentRequest);
+    }
+
+    @PostMapping("/answer")
+    @Operation(summary = "Answer to comment",
+            description = "User can answer to comment")
+    public NewsInnerPageResponse answerToComment(AnswerRequest answerRequest) {
+        return commentService.answerToComment(answerRequest);
     }
 }

@@ -55,7 +55,7 @@ public class User implements UserDetails {
             REFRESH,
             MERGE,
             DETACH})
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
