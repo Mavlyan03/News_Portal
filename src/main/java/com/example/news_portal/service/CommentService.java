@@ -1,5 +1,6 @@
 package com.example.news_portal.service;
 
+import com.example.news_portal.dto.request.AnswerRequest;
 import com.example.news_portal.dto.request.CommentRequest;
 import com.example.news_portal.dto.response.CommentResponse;
 import com.example.news_portal.dto.response.NewsInnerPageResponse;
@@ -15,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,5 +49,18 @@ public class CommentService {
         List<CommentResponse> comments = commentRepository.getCommentsByNewsId(news.getId());
         newsInnerPage.setComments(comments);
         return newsInnerPage;
+    }
+
+    public NewsInnerPageResponse answerToComment(AnswerRequest answerRequest) {
+        Comment comment = commentRepository.findById(answerRequest.getCommentId())
+                .orElseThrow(() -> new NotFoundException("Comment not found"));
+        News news = newsRepository.findById(comment.getNews().getId())
+                .orElseThrow(() -> new NotFoundException("News not found"));
+        Comment comment1 = new Comment(answerRequest.getComment(), LocalDate.now());
+        User user = getAuthentication();
+        comment1.setUser(user);
+        comment1.setNews(comment.getNews());
+        news.getComments().add(comment1);
+        return null;
     }
 }

@@ -48,4 +48,9 @@ public class Comment {
         this.comment = commentRequest.getComment();
         this.dateOfComment = LocalDate.now();
     }
+
+    public Comment(String comment, LocalDate date) {
+        this.comment = comment;
+        this.dateOfComment = date;
+    }
 }
