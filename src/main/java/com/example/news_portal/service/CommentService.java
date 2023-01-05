@@ -2,6 +2,7 @@ package com.example.news_portal.service;
 
 import com.example.news_portal.dto.request.AnswerRequest;
 import com.example.news_portal.dto.request.CommentRequest;
+import com.example.news_portal.dto.response.AnswerResponse;
 import com.example.news_portal.dto.response.CommentResponse;
 import com.example.news_portal.dto.response.NewsInnerPageResponse;
 import com.example.news_portal.exception.NotFoundException;

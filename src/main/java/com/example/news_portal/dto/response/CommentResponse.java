@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,6 +18,7 @@ public class CommentResponse {
     private String image;
     private String comment;
     private LocalDate commentedAt;
+    private List<AnswerResponse> answers;
 
     public CommentResponse(Comment comment, User user) {
         this.id = comment.getId();
