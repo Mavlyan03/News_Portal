@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -18,7 +19,15 @@ public class CommentResponse {
     private String image;
     private String comment;
     private LocalDate commentedAt;
-    private List<AnswerResponse> answers;
+    private List<AnswerResponse> answers = new ArrayList<>();
+
+    public CommentResponse(Long id, String fullName, String image, String comment, LocalDate commentedAt) {
+        this.id = id;
+        this.fullName = fullName;
+        this.image = image;
+        this.comment = comment;
+        this.commentedAt = commentedAt;
+    }
 
     public CommentResponse(Comment comment, User user) {
         this.id = comment.getId();
