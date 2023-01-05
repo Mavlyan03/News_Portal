@@ -61,6 +61,13 @@ public class CommentService {
         comment1.setUser(user);
         comment1.setNews(comment.getNews());
         news.getComments().add(comment1);
-        return null;
+        comment.getAnswers().add(user);
+        user.getComments().add(comment);
+        commentRepository.save(comment1);
+        commentRepository.save(comment);
+        NewsInnerPageResponse newsInnerPage = newsRepository.getNewsById(news.getId());
+        List<CommentResponse> comments = commentRepository.getCommentsByNewsId(news.getId());
+        newsInnerPage.setComments(comments);
+        return newsInnerPage;
     }
 }
