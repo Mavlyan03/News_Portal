@@ -44,7 +44,7 @@ public class NewsService {
                 .orElseThrow(() -> new NotFoundException("Publisher not found"));
         publisher.getMyPublications().add(news);
         news.setPublisher(publisher);
-//        newsRepository.save(news);
+        newsRepository.save(news);
         return newsRepository.getNews(news.getId());
     }
 
@@ -56,7 +56,7 @@ public class NewsService {
         user.getMyPublications().remove(news);
         news.setPublisher(null);
         news.setSelect(null);
-//        newsRepository.delete(news);
+        newsRepository.delete(news);
         return new SimpleResponse("News deleted successfully");
     }
 

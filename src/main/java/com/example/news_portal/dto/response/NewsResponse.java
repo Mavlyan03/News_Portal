@@ -4,6 +4,7 @@ import com.example.news_portal.model.News;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import java.time.LocalDate;
 
 @Getter
@@ -14,7 +15,7 @@ public class NewsResponse {
     private String description;
     private String image;
     private LocalDate publicationDate;
-    private Boolean selected;
+    private Boolean selected = false;
 
     public NewsResponse(Long id, String header, String description, String image, LocalDate publicationDate) {
         this.id = id;
