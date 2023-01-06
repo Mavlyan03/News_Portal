@@ -1,18 +1,17 @@
-package com.example.news_portal.service;
+package com.example.news_portal.db.service;
 
+import com.example.news_portal.db.model.News;
+import com.example.news_portal.db.model.User;
 import com.example.news_portal.dto.request.UpdateProfileRequest;
 import com.example.news_portal.dto.response.NewsResponse;
 import com.example.news_portal.dto.response.UpdateProfileResponse;
-import com.example.news_portal.model.News;
-import com.example.news_portal.model.User;
 import com.example.news_portal.exception.NotFoundException;
-import com.example.news_portal.repository.NewsRepository;
-import com.example.news_portal.repository.UserRepository;
+import com.example.news_portal.db.repository.NewsRepository;
+import com.example.news_portal.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 

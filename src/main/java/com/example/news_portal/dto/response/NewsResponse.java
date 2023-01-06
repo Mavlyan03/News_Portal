@@ -1,10 +1,9 @@
 package com.example.news_portal.dto.response;
 
-import com.example.news_portal.model.News;
+import com.example.news_portal.db.model.News;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
 
 @Getter

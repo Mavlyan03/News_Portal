@@ -1,4 +1,4 @@
-package com.example.news_portal.model.enums;
+package com.example.news_portal.db.model.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 

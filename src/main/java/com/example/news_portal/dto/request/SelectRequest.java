@@ -1,6 +1,5 @@
 package com.example.news_portal.dto.request;
 
-import com.example.news_portal.model.News;
 import lombok.Getter;
 import lombok.Setter;
 

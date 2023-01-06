@@ -1,6 +1,6 @@
 package com.example.news_portal.dto.response;
 
-import com.example.news_portal.model.News;
+import com.example.news_portal.db.model.News;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
