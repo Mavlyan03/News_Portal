@@ -14,6 +14,10 @@ INSERT INTO comments(id, comment, date_of_comment, news_id, user_id)
 VALUES (1, 'The best news', '2022/11/21', 1, 1),
        (2, 'I dont like this news', '2022/12/29', 2, 2);
 
+INSERT INTO answers(id ,answer, date_of_comment, full_name, photo, comment_id, user_id)
+VALUES (1, 'hello world','2023/01/06', 'Alihan', 'foot.com', 1, 1),
+       (2, 'hello','2023/01/01', 'Alia', 'photo.ru', 2, 2);
+
 INSERT INTO users_favorites(select_id, favorites_id)
 VALUES (1, 1),
        (2, 2);
