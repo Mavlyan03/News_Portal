@@ -30,10 +30,10 @@ public class CommentApi {
         return commentService.comment(commentRequest);
     }
 
-    @PostMapping("/answer")
-    @Operation(summary = "Answer to comment",
-            description = "User can answer to comment")
-    public NewsInnerPageResponse answerToComment(AnswerRequest answerRequest) {
-        return commentService.answerToComment(answerRequest);
-    }
+//    @PostMapping("/answer")
+//    @Operation(summary = "Answer to comment",
+//            description = "User can answer to comment")
+//    public NewsInnerPageResponse answerToComment(AnswerRequest answerRequest) {
+//        return commentService.answerToComment(answerRequest);
+//    }
 }
