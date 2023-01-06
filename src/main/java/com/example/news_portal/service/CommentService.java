@@ -18,11 +18,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CommentService {
 
@@ -46,7 +48,6 @@ public class CommentService {
         user.getMyComments().add(comment);
         comment.setNews(news);
         news.getComments().add(comment);
-        commentRepository.save(comment);
         NewsInnerPageResponse newsInnerPage = newsRepository.getNewsById(news.getId());
         List<CommentResponse> comments = commentRepository.getCommentsByNewsId(news.getId());
         newsInnerPage.setComments(comments);
@@ -68,7 +69,6 @@ public class CommentService {
         answer.setComment(comment);
         answer.setUser(user);
         comment.getAnswers().add(answer);
-        commentRepository.save(comment);
         NewsInnerPageResponse news = newsRepository.getNewsById(news1.getId());
         List<CommentResponse> comments = commentRepository.getCommentsByNewsId(news.getId());
         for (CommentResponse commentResponse : comments) {

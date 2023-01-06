@@ -17,11 +17,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class NewsService {
 
@@ -42,7 +44,7 @@ public class NewsService {
                 .orElseThrow(() -> new NotFoundException("Publisher not found"));
         publisher.getMyPublications().add(news);
         news.setPublisher(publisher);
-        newsRepository.save(news);
+//        newsRepository.save(news);
         return newsRepository.getNews(news.getId());
     }
 
@@ -54,7 +56,7 @@ public class NewsService {
         user.getMyPublications().remove(news);
         news.setPublisher(null);
         news.setSelect(null);
-        newsRepository.delete(news);
+//        newsRepository.delete(news);
         return new SimpleResponse("News deleted successfully");
     }
 
