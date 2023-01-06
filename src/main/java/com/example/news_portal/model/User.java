@@ -51,12 +51,6 @@ public class User implements UserDetails {
             DETACH}, mappedBy = "user")
     private List<Comment> myComments = new ArrayList<>();
 
-    @ManyToMany(cascade = {
-            REFRESH,
-            MERGE,
-            DETACH})
-    private List<Comment> comments = new ArrayList<>();
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(role);
