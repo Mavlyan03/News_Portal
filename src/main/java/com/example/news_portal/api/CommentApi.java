@@ -3,7 +3,7 @@ package com.example.news_portal.api;
 import com.example.news_portal.dto.request.AnswerRequest;
 import com.example.news_portal.dto.request.CommentRequest;
 import com.example.news_portal.dto.response.NewsInnerPageResponse;
-import com.example.news_portal.service.CommentService;
+import com.example.news_portal.db.service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

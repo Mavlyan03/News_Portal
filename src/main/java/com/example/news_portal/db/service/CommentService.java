@@ -1,26 +1,24 @@
-package com.example.news_portal.service;
+package com.example.news_portal.db.service;
 
+import com.example.news_portal.db.model.Answer;
+import com.example.news_portal.db.model.Comment;
+import com.example.news_portal.db.model.News;
+import com.example.news_portal.db.model.User;
+import com.example.news_portal.db.repository.CommentRepository;
+import com.example.news_portal.db.repository.NewsRepository;
+import com.example.news_portal.db.repository.UserRepository;
 import com.example.news_portal.dto.request.AnswerRequest;
 import com.example.news_portal.dto.request.CommentRequest;
 import com.example.news_portal.dto.response.AnswerResponse;
 import com.example.news_portal.dto.response.CommentResponse;
 import com.example.news_portal.dto.response.NewsInnerPageResponse;
 import com.example.news_portal.exception.NotFoundException;
-import com.example.news_portal.model.Answer;
-import com.example.news_portal.model.Comment;
-import com.example.news_portal.model.News;
-import com.example.news_portal.model.User;
-import com.example.news_portal.repository.CommentRepository;
-import com.example.news_portal.repository.NewsRepository;
-import com.example.news_portal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

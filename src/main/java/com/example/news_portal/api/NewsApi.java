@@ -5,7 +5,7 @@ import com.example.news_portal.dto.request.SelectRequest;
 import com.example.news_portal.dto.response.NewsInnerPageResponse;
 import com.example.news_portal.dto.response.NewsResponse;
 import com.example.news_portal.dto.response.SimpleResponse;
-import com.example.news_portal.service.NewsService;
+import com.example.news_portal.db.service.NewsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

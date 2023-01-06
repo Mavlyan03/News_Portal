@@ -1,4 +1,4 @@
-package com.example.news_portal.model;
+package com.example.news_portal.db.model;
 
 
 import com.example.news_portal.dto.request.CommentRequest;

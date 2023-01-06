@@ -3,7 +3,7 @@ package com.example.news_portal.api;
 import com.example.news_portal.dto.request.UpdateProfileRequest;
 import com.example.news_portal.dto.response.NewsResponse;
 import com.example.news_portal.dto.response.UpdateProfileResponse;
-import com.example.news_portal.service.ProfileService;
+import com.example.news_portal.db.service.ProfileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

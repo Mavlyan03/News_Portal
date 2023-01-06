@@ -1,7 +1,7 @@
-package com.example.news_portal.repository;
+package com.example.news_portal.db.repository;
 
+import com.example.news_portal.db.model.Comment;
 import com.example.news_portal.dto.response.CommentResponse;
-import com.example.news_portal.model.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

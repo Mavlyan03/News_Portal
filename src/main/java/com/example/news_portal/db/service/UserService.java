@@ -1,14 +1,13 @@
-package com.example.news_portal.service;
+package com.example.news_portal.db.service;
 
+import com.example.news_portal.db.model.User;
+import com.example.news_portal.db.model.enums.Role;
 import com.example.news_portal.dto.request.SignInRequest;
 import com.example.news_portal.dto.request.SignUpRequest;
 import com.example.news_portal.dto.response.AuthResponse;
-import com.example.news_portal.model.User;
-import com.example.news_portal.model.enums.Role;
 import com.example.news_portal.exception.BadRequestException;
 import com.example.news_portal.exception.NotFoundException;
-import com.example.news_portal.repository.NewsRepository;
-import com.example.news_portal.repository.UserRepository;
+import com.example.news_portal.db.repository.UserRepository;
 import com.example.news_portal.security.jwt.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

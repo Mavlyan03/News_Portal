@@ -1,6 +1,6 @@
 package com.example.news_portal.dto.request;
 
-import com.example.news_portal.model.enums.Category;
+import com.example.news_portal.db.model.enums.Category;
 import lombok.Getter;
 import lombok.Setter;
 
