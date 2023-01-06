@@ -39,11 +39,8 @@ public class Comment {
             DETACH})
     private News news;
 
-    @ManyToMany(cascade = {
-            REFRESH,
-            MERGE,
-            DETACH}, mappedBy = "comments")
-    private List<User> answers = new ArrayList<>();
+    @OneToMany(cascade = ALL, mappedBy = "comment")
+    private List<Answer> answers = new ArrayList<>();
 
     public Comment(CommentRequest commentRequest) {
         this.comment = commentRequest.getComment();

@@ -6,6 +6,7 @@ import com.example.news_portal.dto.response.AnswerResponse;
 import com.example.news_portal.dto.response.CommentResponse;
 import com.example.news_portal.dto.response.NewsInnerPageResponse;
 import com.example.news_portal.exception.NotFoundException;
+import com.example.news_portal.model.Answer;
 import com.example.news_portal.model.Comment;
 import com.example.news_portal.model.News;
 import com.example.news_portal.model.User;
@@ -17,11 +18,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CommentService {
 
@@ -45,7 +48,6 @@ public class CommentService {
         user.getMyComments().add(comment);
         comment.setNews(news);
         news.getComments().add(comment);
-        commentRepository.save(comment);
         NewsInnerPageResponse newsInnerPage = newsRepository.getNewsById(news.getId());
         List<CommentResponse> comments = commentRepository.getCommentsByNewsId(news.getId());
         newsInnerPage.setComments(comments);
@@ -60,36 +62,30 @@ public class CommentService {
     public NewsInnerPageResponse answerToComment(AnswerRequest answerRequest) {
         Comment comment = commentRepository.findById(answerRequest.getCommentId())
                 .orElseThrow(() -> new NotFoundException("Comment not found"));
-        News news = newsRepository.findById(comment.getNews().getId())
+        News news1 = newsRepository.findById(comment.getNews().getId())
                 .orElseThrow(() -> new NotFoundException("News not found"));
-        Comment comment1 = new Comment(answerRequest.getComment(), LocalDate.now());
         User user = getAuthentication();
-        comment1.setUser(user);
-        comment1.setNews(comment.getNews());
-        news.getComments().add(comment1);
-        comment.getAnswers().add(user);
-        user.getComments().add(comment);
-        commentRepository.save(comment1);
-        commentRepository.save(comment);
-        NewsInnerPageResponse newsInnerPage = newsRepository.getNewsById(news.getId());
+        Answer answer = new Answer(user, answerRequest);
+        answer.setComment(comment);
+        answer.setUser(user);
+        comment.getAnswers().add(answer);
+        NewsInnerPageResponse news = newsRepository.getNewsById(news1.getId());
         List<CommentResponse> comments = commentRepository.getCommentsByNewsId(news.getId());
         for (CommentResponse commentResponse : comments) {
             if (commentResponse.getId().equals(comment.getId())) {
                 commentResponse.getAnswers().add(
                         new AnswerResponse(
-                                comment1.getId(),
-                                user.getName() + " " + user.getSurname(),
-                                user.getPhoto(),
-                                answerRequest.getComment(),
-                                LocalDate.now()));
+                                answer.getId(),
+                                user,
+                                answerRequest.getComment()));
             }
         }
-        newsInnerPage.setComments(comments);
-        if (news.getSelect().contains(user)) {
-            newsInnerPage.setSelected(true);
+        news.setComments(comments);
+        if (news1.getSelect().contains(user)) {
+            news.setSelected(true);
         } else {
-            newsInnerPage.setSelected(false);
+            news.setSelected(false);
         }
-        return newsInnerPage;
+        return news;
     }
 }
