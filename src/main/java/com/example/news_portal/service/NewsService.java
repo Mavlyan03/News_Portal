@@ -40,8 +40,7 @@ public class NewsService {
     public NewsResponse save(NewsRequest newsRequest) {
         News news = new News(newsRequest);
         news.setPublicationDate(LocalDate.now());
-        User publisher = userRepository.findById(newsRequest.getPublisherId())
-                .orElseThrow(() -> new NotFoundException("Publisher not found"));
+        User publisher = getAuthentication();
         publisher.getMyPublications().add(news);
         news.setPublisher(publisher);
         newsRepository.save(news);

@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class NewsRequest {
-    private Long publisherId;
     private String header;
     private String description;
     private String text;
