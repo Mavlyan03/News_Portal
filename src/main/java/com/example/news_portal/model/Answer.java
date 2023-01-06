@@ -1,5 +1,6 @@
 package com.example.news_portal.model;
 
+import com.example.news_portal.dto.request.AnswerRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,4 +38,10 @@ public class Answer {
             DETACH})
     private User user;
 
+    public Answer(User user, AnswerRequest answerRequest) {
+        this.fullName = user.getName() + " " + user.getSurname();
+        this.photo = user.getPhoto();
+        this.answer = answerRequest.getComment();
+        this.dateOfComment = LocalDate.now();
+    }
 }
